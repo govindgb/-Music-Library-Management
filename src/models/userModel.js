@@ -10,6 +10,13 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['Admin', 'Editor', 'Viewer'], default: 'Viewer' },
+  organization: {
+    type: String, // References the Organization model
+    ref: 'Organization',
+    required: function () {
+      return this.role === 'editor' || this.role === 'admin'; // Required for admin or editor
+    },
+  },
 });
 
 const User = mongoose.model('User', userSchema);

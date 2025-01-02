@@ -1,10 +1,10 @@
 const User = require('../models/userModel');
+const {sendResponse} = require('../utils/responseHelper')
 
 // CREATE a new user
 const createUser = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-    console.log(req.body)
     const result = await User.create({
       email:email,
       password:password,
@@ -63,5 +63,7 @@ const deleteUser = async (req, res) => {
     res.status(500).json({ error: 'Error deleting user' });
   }
 };
+
+
 
 module.exports = { createUser, getAllUsers, getUserById, updateUser, deleteUser };

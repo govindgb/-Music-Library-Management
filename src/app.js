@@ -6,6 +6,7 @@ const trackRoutes = require('./routes/trackRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
 const artistRoutes = require('./routes/artistRoutes');
 const albumRoutes = require('./routes/albumRoutes');
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // Middleware
@@ -19,5 +20,6 @@ app.use('/api/v1', trackRoutes);
 app.use('/api/v1', favoriteRoutes);
 app.use('/artists', artistRoutes);
 app.use('/albums', albumRoutes);
+app.use('/', authRoutes);
 
 module.exports = app;
