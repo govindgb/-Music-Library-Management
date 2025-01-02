@@ -7,6 +7,8 @@ const favoriteRoutes = require('./routes/favoriteRoutes');
 const artistRoutes = require('./routes/artistRoutes');
 const albumRoutes = require('./routes/albumRoutes');
 const authRoutes = require('./routes/authRoutes');
+const { authenticate } = require('./middleware/authenticate');
+
 const app = express();
 
 // Middleware
@@ -15,11 +17,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Use the routes
-app.use('/api/v1', userRoutes);
-app.use('/api/v1', trackRoutes);
-app.use('/api/v1', favoriteRoutes);
-app.use('/artists', artistRoutes);
-app.use('/albums', albumRoutes);
+app.use('/api/v1',authenticate ,userRoutes);
+app.use('/api/v1',authenticate, trackRoutes);
+app.use('/api/v1',authenticate, favoriteRoutes);
+app.use('/artists',authenticate, artistRoutes);
+app.use('/albums',authenticate, albumRoutes);
 app.use('/', authRoutes);
 
 module.exports = app;
